@@ -11,11 +11,19 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
-    { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { to: '/matches', label: 'Matches', icon: Compass },
-    { to: '/dashboard', label: 'Itineraries', icon: Map, hash: '#itineraries' },
-    { to: '/dashboard', label: 'Diaries', icon: BookOpen, hash: '#diaries' },
+    { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard, id: 'dashboard' },
+    { to: '/matches', label: 'Matches', icon: Compass, id: 'matches' },
+    { to: '/dashboard#itineraries', label: 'Itineraries', icon: Map, id: 'itineraries' },
+    { to: '/dashboard#diaries', label: 'Diaries', icon: BookOpen, id: 'diaries' },
   ];
+
+  const getIsActive = (link: typeof links[0]) => {
+    const hash = location.hash;
+    if (link.id === 'itineraries') return location.pathname === '/dashboard' && hash === '#itineraries';
+    if (link.id === 'diaries') return location.pathname === '/dashboard' && hash === '#diaries';
+    if (link.id === 'dashboard') return location.pathname === '/dashboard' && !hash;
+    return location.pathname === link.to;
+  };
 
   const handleLogout = () => {
     logout();
