@@ -64,6 +64,8 @@ export default function Admin() {
         address: editAct.address || '',
         tips: '',
         images: [`https://picsum.photos/seed/${Date.now()}/800/600`],
+        latitude: 0,
+        longitude: 0,
       };
       setActs(as2 => [...as2, newAct]);
       toast.success('Activity added');
