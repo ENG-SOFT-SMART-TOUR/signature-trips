@@ -20,6 +20,8 @@ export interface Activity {
   address: string;
   tips: string;
   images: string[];
+  latitude: number;
+  longitude: number;
 }
 
 export const destinations: Destination[] = [
@@ -53,28 +55,28 @@ export const destinations: Destination[] = [
   },
   {
     id: 'd5', name: 'Bonito', country: 'Brasil',
-    description: 'Crystal-clear rivers, underwater caves, and ecotourism at its finest — a nature lover\'s dream in the heart of Mato Grosso do Sul.',
+    description: 'Crystal-clear rivers, underground caves, and immersive ecotourism in the heart of Mato Grosso do Sul.',
     tags: ['nature', 'adventure', 'ecotourism', 'moderate'],
     image: 'https://picsum.photos/seed/bonito/800/600',
     latitude: -21.1261, longitude: -56.4836,
   },
   {
     id: 'd6', name: 'Buenos Aires', country: 'Argentina',
-    description: 'The Paris of South America — where tango echoes through cobblestone streets, world-class steakhouses await, and art fills every corner.',
+    description: 'A cosmopolitan capital pulsing with tango, world-class steakhouses, and a thriving arts scene.',
     tags: ['city', 'culture', 'gastronomy', 'comfortable'],
     image: 'https://picsum.photos/seed/buenosaires/800/600',
     latitude: -34.6037, longitude: -58.3816,
   },
   {
     id: 'd7', name: 'Cartagena', country: 'Colômbia',
-    description: 'A vibrant walled city where Caribbean colors meet colonial architecture, street food sizzles, and the sea breeze tells centuries of stories.',
+    description: 'A walled colonial gem on the Caribbean coast with colorful streets, rich history, and vibrant nightlife.',
     tags: ['beach', 'city', 'culture', 'moderate'],
     image: 'https://picsum.photos/seed/cartagena/800/600',
     latitude: 10.391, longitude: -75.5144,
   },
   {
     id: 'd8', name: 'Cusco', country: 'Peru',
-    description: 'The ancient capital of the Inca Empire — a living museum of history, altitude, and adventure at the gateway to Machu Picchu.',
+    description: 'The ancient Inca capital surrounded by sacred valleys, archaeological wonders, and the gateway to Machu Picchu.',
     tags: ['mountains', 'culture', 'history', 'adventure', 'moderate'],
     image: 'https://picsum.photos/seed/cusco/800/600',
     latitude: -13.532, longitude: -71.9675,
@@ -84,7 +86,7 @@ export const destinations: Destination[] = [
 const categories = ['Sightseeing', 'Food & Drink', 'Nature', 'Adventure', 'Culture', 'Shopping'];
 const shifts: ('morning' | 'afternoon' | 'evening')[] = ['morning', 'afternoon', 'evening'];
 
-const activityTemplates: Record<string, { names: string[]; descriptions: string[] }> = {
+const activityTemplates: Record<string, { names: string[]; descriptions: string[]; coords: [number, number][] }> = {
   'd1': {
     names: ['Praia da Joaquina', 'Lagoa da Conceição', 'Mercado Público', 'Trilha da Lagoinha do Leste', 'Ribeirão da Ilha', 'Santo Antônio de Lisboa', 'Barra da Lagoa', 'Jurerê Internacional'],
     descriptions: [
@@ -97,6 +99,7 @@ const activityTemplates: Record<string, { names: string[]; descriptions: string[
       'Fishing village with a natural canal and boat rides.',
       'Upscale beach district with beach clubs and nightlife.',
     ],
+    coords: [[-27.6308,-48.4753],[-27.5934,-48.4832],[-27.5969,-48.5495],[-27.7756,-48.4897],[-27.7142,-48.5669],[-27.5092,-48.5189],[-27.5734,-48.4226],[-27.4362,-48.4933]],
   },
   'd2': {
     names: ['Lago Negro', 'Rua Coberta', 'Mundo de Chocolate', 'Vinícola Ravanello', 'Mini Mundo', 'Snowland', 'Le Jardin Parque de Lavanda', 'Café Colonial'],
@@ -110,6 +113,7 @@ const activityTemplates: Record<string, { names: string[]; descriptions: string[
       'Lavender fields with panoramic views of the Serra Gaúcha.',
       'Traditional colonial-style afternoon tea with dozens of pastries.',
     ],
+    coords: [[-29.3833,-50.8773],[-29.3749,-50.8760],[-29.3721,-50.8742],[-29.1647,-51.1538],[-29.3745,-50.8714],[-29.3701,-50.8619],[-29.3567,-50.8487],[-29.3682,-50.8798]],
   },
   'd3': {
     names: ['Baía do Sancho', 'Mirante dos Golfinhos', 'Mergulho no Sueste', 'Forte de Nossa Senhora', 'Praia do Leão', 'Trilha do Atalaia', 'Praia da Conceição', 'Passeio de Barco'],
@@ -123,6 +127,7 @@ const activityTemplates: Record<string, { names: string[]; descriptions: string[
       'Long golden beach perfect for sunset contemplation.',
       'Boat tour around the islands with dolphin sightings.',
     ],
+    coords: [[-3.8552,-32.4440],[-3.8636,-32.4456],[-3.8571,-32.4109],[-3.8393,-32.4116],[-3.8649,-32.4098],[-3.8669,-32.4224],[-3.8412,-32.4274],[-3.8489,-32.4330]],
   },
   'd4': {
     names: ['Cachoeira da Fumaça', 'Gruta da Lapa Doce', 'Poço Azul', 'Vale do Paty', 'Morro do Pai Inácio', 'Poço Encantado', 'Cachoeira do Buracão', 'Igatu'],
@@ -136,6 +141,7 @@ const activityTemplates: Record<string, { names: string[]; descriptions: string[
       'Spectacular canyon waterfall reached via a river hike.',
       'Ghost town turned open-air art gallery in the mountains.',
     ],
+    coords: [[-12.5833,-41.6167],[-12.3667,-41.5667],[-12.7506,-41.3367],[-12.4833,-41.4333],[-12.4519,-41.6056],[-12.7497,-41.3364],[-13.1531,-41.1142],[-12.5853,-41.3264]],
   },
   'd5': {
     names: ['Rio da Prata', 'Gruta do Lago Azul', 'Boia Cross', 'Aquário Natural', 'Abismo Anhumas', 'Buraco das Araras', 'Estância Mimosa', 'Rio Sucuri'],
@@ -149,6 +155,7 @@ const activityTemplates: Record<string, { names: string[]; descriptions: string[
       'Waterfall trail through private ecological reserve.',
       'Peaceful float down one of the clearest rivers on Earth.',
     ],
+    coords: [[-21.2489,-56.5272],[-21.1208,-56.5873],[-21.1569,-56.4731],[-21.2547,-56.4506],[-21.1317,-56.5731],[-21.4939,-56.5772],[-21.2011,-56.5036],[-21.2572,-56.4142]],
   },
   'd6': {
     names: ['La Boca & Caminito', 'Recoleta Cemetery', 'San Telmo Market', 'Teatro Colón', 'Puerto Madero', 'Parrilla Experience', 'MALBA Museum', 'Tango Show'],
@@ -162,6 +169,7 @@ const activityTemplates: Record<string, { names: string[]; descriptions: string[
       'Latin American art museum with rotating contemporary exhibits.',
       'Authentic dinner tango show in a historic milonga venue.',
     ],
+    coords: [[-34.6345,-58.3631],[-34.5882,-58.3939],[-34.6215,-58.3718],[-34.6011,-58.3833],[-34.6117,-58.3617],[-34.5996,-58.3750],[-34.5769,-58.4028],[-34.6150,-58.3800]],
   },
   'd7': {
     names: ['Ciudad Amurallada', 'Castillo San Felipe', 'Islas del Rosario', 'Getsemaní', 'Bazurto Market', 'Café del Mar', 'Playa Blanca', 'Chiva Party Bus'],
@@ -175,6 +183,7 @@ const activityTemplates: Record<string, { names: string[]; descriptions: string[
       'White-sand beach escape on the Barú peninsula.',
       'Iconic open-air party bus tour through the city at night.',
     ],
+    coords: [[10.4236,-75.5503],[10.4225,-75.5373],[10.1764,-75.7536],[10.4199,-75.5492],[10.4000,-75.5133],[10.4267,-75.5483],[10.1742,-75.6122],[10.4150,-75.5400]],
   },
   'd8': {
     names: ['Machu Picchu Day Trip', 'Sacred Valley Tour', 'San Pedro Market', 'Sacsayhuamán', 'Rainbow Mountain', 'Chocolate Museum', 'Plaza de Armas', 'Pisco Sour Workshop'],
@@ -188,6 +197,7 @@ const activityTemplates: Record<string, { names: string[]; descriptions: string[
       'The grand central plaza flanked by colonial architecture.',
       'Hands-on cocktail class making Peru\'s national drink.',
     ],
+    coords: [[-13.1631,-72.5450],[-13.3319,-72.1553],[-13.5186,-71.9786],[-13.5089,-71.9822],[-13.8700,-71.3028],[-13.5150,-71.9781],[-13.5170,-71.9785],[-13.5200,-71.9750]],
   },
 };
 
@@ -208,6 +218,8 @@ export const activities: Activity[] = destinations.flatMap((dest) => {
       `https://picsum.photos/seed/${dest.id}-${i}-2/800/600`,
       `https://picsum.photos/seed/${dest.id}-${i}-3/800/600`,
     ],
+    latitude: template.coords[i][0],
+    longitude: template.coords[i][1],
   }));
 });
 
