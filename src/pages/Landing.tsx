@@ -45,9 +45,11 @@ export default function Landing() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <div className="flex items-center justify-center gap-2 mb-6">
-                <Compass className="h-7 w-7 text-accent" />
-                <span className="font-body text-sm tracking-[0.2em] uppercase text-accent">
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <div className="w-10 h-10 rounded-full border-2 border-accent flex items-center justify-center">
+                  <Compass className="h-5 w-5 text-accent" />
+                </div>
+                <span className="font-body text-sm tracking-[0.3em] uppercase text-accent font-medium">
                   Signature Trips
                 </span>
               </div>
@@ -66,7 +68,7 @@ export default function Landing() {
                   </Button>
                 </Link>
                 <Link to="/login">
-                  <Button size="lg" variant="outline" className="rounded-full border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10 px-8 text-base">
+                  <Button size="lg" variant="outline" className="rounded-full border-2 border-primary-foreground/60 text-primary-foreground bg-primary-foreground/10 backdrop-blur-sm hover:bg-primary-foreground/20 px-8 text-base font-medium">
                     Sign In
                   </Button>
                 </Link>
