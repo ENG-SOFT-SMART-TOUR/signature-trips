@@ -43,10 +43,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <div className="hidden md:flex items-center gap-1">
               {links.map(link => (
                 <Link
-                  key={link.label}
+                  key={link.id}
                   to={link.to}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-body font-medium transition-all duration-200 group ${
-                    location.pathname === link.to
+                    getIsActive(link)
                       ? 'bg-primary/10 text-primary'
                       : 'text-muted-foreground hover:text-foreground hover:bg-surface'
                   }`}
