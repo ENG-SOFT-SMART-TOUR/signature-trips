@@ -64,9 +64,12 @@ interface AppState {
   toggleSaveDestination: (id: string) => void;
   addItinerary: (itinerary: Itinerary) => void;
   updateItinerary: (id: string, days: ItineraryDay[]) => void;
+  deleteItinerary: (id: string) => void;
   addDiary: (diary: Diary) => void;
   toggleDiaryPublic: (id: string) => void;
   addDiaryEntry: (entry: DiaryEntry) => void;
+  deleteDiaryEntry: (diaryId: string, entryId: string) => void;
+  deleteDiary: (id: string) => void;
   updateProfile: (name: string, email: string) => void;
 }
 

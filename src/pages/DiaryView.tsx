@@ -1,9 +1,9 @@
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useStore } from '@/store/useStore';
 import { getDestination, getActivity } from '@/data/mockData';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
-import { Plus, Share2, BookOpen, Image, Calendar } from 'lucide-react';
+import { Plus, Share2, BookOpen, Image, Calendar, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { motion } from 'framer-motion';
 import EmptyState from '@/components/EmptyState';
