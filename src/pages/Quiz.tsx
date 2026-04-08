@@ -4,16 +4,60 @@ import { useStore, QuizAnswers } from '@/store/useStore';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
 import { toast } from 'sonner';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Waves, Mountain, Building2, TreePine, Compass, Landmark, Palmtree, UtensilsCrossed, Wallet, BadgeDollarSign, CreditCard, Gem, User, Heart, Users, UserPlus, Snail, Scale, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 
 const questions = [
-  { key: 'landscape', title: 'Your ideal landscape?', options: ['Beach', 'Mountains', 'City', 'Countryside'] },
-  { key: 'style', title: 'Your travel style?', options: ['Adventure', 'Culture', 'Relaxation', 'Gastronomy'] },
-  { key: 'budget', title: 'Your budget range?', options: ['Budget', 'Moderate', 'Comfortable', 'Luxury'] },
-  { key: 'companion', title: 'Who are you traveling with?', options: ['Solo', 'Couple', 'Family', 'Friends'] },
-  { key: 'pace', title: 'Your travel pace?', options: ['Slow & deep', 'Balanced', 'Fast & packed'] },
+  {
+    key: 'landscape',
+    title: 'Where do you feel most alive?',
+    options: [
+      { label: 'Beach', icon: Waves },
+      { label: 'Mountains', icon: Mountain },
+      { label: 'City', icon: Building2 },
+      { label: 'Countryside', icon: TreePine },
+    ],
+  },
+  {
+    key: 'style',
+    title: 'What moves your soul?',
+    options: [
+      { label: 'Adventure', icon: Compass },
+      { label: 'Culture', icon: Landmark },
+      { label: 'Relaxation', icon: Palmtree },
+      { label: 'Gastronomy', icon: UtensilsCrossed },
+    ],
+  },
+  {
+    key: 'budget',
+    title: 'Your comfort zone?',
+    options: [
+      { label: 'Budget', icon: Wallet },
+      { label: 'Moderate', icon: BadgeDollarSign },
+      { label: 'Comfortable', icon: CreditCard },
+      { label: 'Luxury', icon: Gem },
+    ],
+  },
+  {
+    key: 'companion',
+    title: 'Who shares the journey?',
+    options: [
+      { label: 'Solo', icon: User },
+      { label: 'Couple', icon: Heart },
+      { label: 'Family', icon: Users },
+      { label: 'Friends', icon: UserPlus },
+    ],
+  },
+  {
+    key: 'pace',
+    title: 'Your rhythm of discovery?',
+    options: [
+      { label: 'Slow & deep', icon: Snail },
+      { label: 'Balanced', icon: Scale },
+      { label: 'Fast & packed', icon: Zap },
+    ],
+  },
 ];
 
 export default function Quiz() {
@@ -54,9 +98,9 @@ export default function Quiz() {
 
   return (
     <PageTransition>
-      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12">
-        <div className="w-full max-w-lg">
-          <div className="mb-8">
+      <div className="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-background">
+        <div className="w-full max-w-xl">
+          <div className="mb-10">
             <span className="font-body text-xs tracking-[0.2em] uppercase text-primary mb-2 block">
               Step {step + 1} of {questions.length}
             </span>
@@ -72,29 +116,47 @@ export default function Quiz() {
               exit={{ opacity: 0, x: direction * -50 }}
               transition={{ duration: 0.3 }}
             >
-              <h2 className="font-display text-3xl font-semibold mb-8">{current.title}</h2>
-              <div className="grid grid-cols-2 gap-3">
+              <h2 className="font-display text-3xl md:text-4xl font-semibold mb-10 text-foreground">
+                {current.title}
+              </h2>
+              <div className={`grid gap-4 ${current.options.length === 3 ? 'grid-cols-3' : 'grid-cols-2'}`}>
                 {current.options.map(opt => {
-                  const selected = answers[current.key as keyof QuizAnswers] === opt;
+                  const selected = answers[current.key as keyof QuizAnswers] === opt.label;
+                  const Icon = opt.icon;
                   return (
-                    <button
-                      key={opt}
-                      onClick={() => select(opt)}
-                      className={`p-5 rounded-lg text-left font-body text-sm font-medium transition-all duration-200 hover-lift ${
+                    <motion.button
+                      key={opt.label}
+                      onClick={() => select(opt.label)}
+                      whileHover={{ scale: 1.04 }}
+                      whileTap={{ scale: 0.97 }}
+                      className={`group relative flex flex-col items-center justify-center gap-3 p-6 md:p-8 rounded-xl font-body text-sm font-medium transition-all duration-300 cursor-pointer ${
                         selected
-                          ? 'bg-primary text-primary-foreground shadow-md'
-                          : 'bg-surface text-foreground hover:bg-surface/80'
+                          ? 'bg-primary text-primary-foreground shadow-lg'
+                          : 'bg-surface text-foreground hover:shadow-md'
                       }`}
                     >
-                      {opt}
-                    </button>
+                      <motion.div
+                        className="relative"
+                        whileHover={{ rotate: [0, -8, 8, -4, 0], transition: { duration: 0.5 } }}
+                      >
+                        <Icon
+                          className={`h-8 w-8 md:h-10 md:w-10 transition-all duration-300 ${
+                            selected
+                              ? 'text-primary-foreground'
+                              : 'text-primary group-hover:scale-110'
+                          }`}
+                          strokeWidth={1.5}
+                        />
+                      </motion.div>
+                      <span className="text-sm md:text-base">{opt.label}</span>
+                    </motion.button>
                   );
                 })}
               </div>
             </motion.div>
           </AnimatePresence>
 
-          <div className="flex justify-between mt-10">
+          <div className="flex justify-between mt-12">
             <Button
               variant="ghost"
               onClick={prev}
