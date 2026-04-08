@@ -1,8 +1,9 @@
 import { useStore } from '@/store/useStore';
 import { destinations, getDestination } from '@/data/mockData';
 import { Link, useNavigate } from 'react-router-dom';
-import { Map, BookOpen, Heart, ArrowRight, Compass, Globe, Calendar, TrendingUp } from 'lucide-react';
+import { Map, BookOpen, Heart, ArrowRight, Compass, Globe, Calendar, TrendingUp, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import AppLayout from '@/components/AppLayout';
@@ -53,6 +54,36 @@ export default function Dashboard() {
             {statCard(<Calendar className="h-5 w-5 text-primary" />, totalDays, 'Days Planned', 0.3)}
             {statCard(<BookOpen className="h-5 w-5 text-primary" />, totalEntries, 'Diary Entries', 0.4)}
           </div>
+
+          {/* Traveler Profile Card */}
+          {user?.travelerProfile && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.45 }}
+              className="mb-14 rounded-xl bg-gradient-to-br from-primary/10 via-accent/5 to-surface p-6 border border-primary/10"
+            >
+              <div className="flex items-start justify-between mb-4">
+                <div className="flex items-center gap-3">
+                  <span className="text-3xl">{user.travelerProfile.emoji}</span>
+                  <div>
+                    <h3 className="font-display text-xl font-semibold text-foreground">{user.travelerProfile.type}</h3>
+                    <p className="font-body text-sm text-muted-foreground">{user.travelerProfile.summary}</p>
+                  </div>
+                </div>
+                <Button variant="ghost" size="sm" onClick={() => navigate('/quiz')} className="gap-1 text-xs">
+                  <Sparkles className="h-3 w-3" /> Retake
+                </Button>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {user.travelerProfile.tags.slice(0, 8).map(tag => (
+                  <Badge key={tag} variant="secondary" className="capitalize text-xs">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </motion.div>
+          )}
 
           {/* Quick Actions */}
           <motion.div
