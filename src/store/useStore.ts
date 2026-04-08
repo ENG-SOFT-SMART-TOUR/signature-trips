@@ -101,9 +101,10 @@ export const useStore = create<AppState>((set) => ({
   }),
 
   setQuizAnswers: (answers) => set((state) => {
-    const tags = Object.values(answers).filter(Boolean).map(v => v!.toLowerCase());
+    const profile = generateTravelerProfile(answers);
+    const tags = profile?.tags || Object.values(answers).filter(Boolean).map(v => v!.toLowerCase());
     return {
-      user: state.user ? { ...state.user, quizAnswers: answers, tags } : null,
+      user: state.user ? { ...state.user, quizAnswers: answers, tags, travelerProfile: profile } : null,
     };
   }),
 
