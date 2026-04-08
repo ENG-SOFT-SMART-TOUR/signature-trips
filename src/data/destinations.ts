@@ -106,13 +106,6 @@ export const destinations: Destination[] = [
     image: 'https://images.unsplash.com/photo-1531218150217-54595bc2b934?w=800&h=600&fit=crop',
     latitude: 30.2672, longitude: -97.7431,
   },
-  {
-    id: 'd15', name: 'Big Bend National Park', country: 'United States',
-    description: 'Remote desert wilderness along the Rio Grande with dramatic canyons, star-filled skies, and some of the most isolated trails in North America.',
-    tags: ['nature', 'adventure', 'mountains', 'budget'],
-    image: 'https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=800&h=600&fit=crop',
-    latitude: 29.2498, longitude: -103.2502,
-  },
 
   // ── Europe ──
   {
