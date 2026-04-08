@@ -13,7 +13,7 @@ export const destinations: Destination[] = [
     id: 'd2', name: 'Gramado', country: 'Brasil',
     description: 'A charming European-inspired mountain town known for its artisanal chocolate, fine dining, and cozy winter festivals nestled in the Serra Gaúcha.',
     tags: ['mountains', 'culture', 'gastronomy', 'comfortable'],
-    image: 'https://images.unsplash.com/photo-1597996768032-9312582a4f42?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1609942571893-c0a3fdd tried896?w=800&h=600&fit=crop',
     latitude: -29.3739, longitude: -50.8765,
   },
   {
