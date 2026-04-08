@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from '@/store/useStore';
-import { Map, Heart, BookOpen, LayoutDashboard, LogOut, Menu, X, Compass, Settings, RefreshCw } from 'lucide-react';
+import { Map, Heart, BookOpen, LayoutDashboard, LogOut, Menu, X, Compass, RefreshCw } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -60,30 +60,21 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <div className="hidden md:flex items-center gap-2">
               <button
                 onClick={() => navigate('/quiz')}
-                title="Retake Quiz"
-                className="p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-surface transition-all duration-200 group"
+                className="relative overflow-hidden flex items-center gap-2 px-4 py-2 rounded-full bg-[hsl(150,80%,38%)] text-white text-sm font-medium transition-all duration-200 hover:shadow-lg hover:shadow-[hsl(150,80%,38%)]/30 group"
               >
-                <RefreshCw className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700 ease-in-out" />
+                <RefreshCw className="h-4 w-4 transition-transform duration-500 group-hover:rotate-180 relative z-10" />
+                <span className="relative z-10">Redo Quiz</span>
               </button>
               <Link
                 to="/settings"
-                title="Settings"
-                className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-surface transition-all duration-200 group"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface hover:bg-surface/80 transition-colors duration-200 group"
               >
-                <Settings className="h-4 w-4 transition-transform duration-200 group-hover:rotate-45" />
-              </Link>
-              <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface">
                 <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-semibold">
                   {user?.name?.charAt(0)?.toUpperCase() || 'U'}
                 </div>
-                <span className="text-sm font-medium text-foreground">{user?.name?.split(' ')[0]}</span>
-              </div>
-              <button
-                onClick={handleLogout}
-                className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-surface transition-all duration-200 group"
-              >
-                <LogOut className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
-              </button>
+                <span className="text-sm font-medium text-foreground">{user?.name}</span>
+              </Link>
             </div>
 
             <button
