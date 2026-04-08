@@ -87,7 +87,7 @@ export const destinations: Destination[] = [
     id: 'd12', name: 'Big Sur', country: 'United States',
     description: 'Jaw-dropping Pacific coastline, towering redwoods, and one of the most scenic highway stretches on the planet — raw California beauty.',
     tags: ['nature', 'adventure', 'luxury', 'romantic'],
-    image: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?w=800&h=600&fit=crop',
     latitude: 36.2704, longitude: -121.8081,
   },
   {
@@ -110,7 +110,7 @@ export const destinations: Destination[] = [
     id: 'd15', name: 'Big Bend National Park', country: 'United States',
     description: 'Remote desert wilderness along the Rio Grande with dramatic canyons, star-filled skies, and some of the most isolated trails in North America.',
     tags: ['nature', 'adventure', 'mountains', 'budget'],
-    image: 'https://images.unsplash.com/photo-1542281286-9e0a16bb7366?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1568515045052-f9a854d70bfd?w=800&h=600&fit=crop',
     latitude: 29.2498, longitude: -103.2502,
   },
 
@@ -147,7 +147,7 @@ export const destinations: Destination[] = [
     id: 'd20', name: 'Swiss Alps', country: 'Switzerland',
     description: 'Snow-capped peaks, emerald valleys, scenic rail journeys, and chocolate-box villages — the ultimate alpine escape.',
     tags: ['mountains', 'nature', 'adventure', 'luxury'],
-    image: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&h=600&fit=crop',
     latitude: 46.8182, longitude: 8.2275,
   },
 ];
