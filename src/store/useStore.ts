@@ -49,6 +49,7 @@ export interface UserProfile {
   email: string;
   quizAnswers: QuizAnswers;
   tags: string[];
+  travelerProfile: TravelerProfile | null;
 }
 
 interface AppState {
