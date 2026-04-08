@@ -133,4 +133,8 @@ export const useStore = create<AppState>((set) => ({
       d.id === entry.diaryId ? { ...d, entries: [...d.entries, entry] } : d
     ),
   })),
+
+  updateProfile: (name, email) => set((state) => ({
+    user: state.user ? { ...state.user, name, email } : null,
+  })),
 }));
