@@ -67,6 +67,7 @@ interface AppState {
   addDiary: (diary: Diary) => void;
   toggleDiaryPublic: (id: string) => void;
   addDiaryEntry: (entry: DiaryEntry) => void;
+  updateProfile: (name: string, email: string) => void;
 }
 
 export const useStore = create<AppState>((set) => ({

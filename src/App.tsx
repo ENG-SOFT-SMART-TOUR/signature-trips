@@ -21,6 +21,7 @@ import DiaryView from "./pages/DiaryView";
 import NewDiaryEntry from "./pages/NewDiaryEntry";
 import PublicDiary from "./pages/PublicDiary";
 import Admin from "./pages/Admin";
+import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -57,6 +58,7 @@ const App = () => (
             <Route path="/diary/:id" element={<ProtectedRoute><DiaryView /></ProtectedRoute>} />
             <Route path="/diary/:id/entry/new" element={<ProtectedRoute><NewDiaryEntry /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
+            <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
