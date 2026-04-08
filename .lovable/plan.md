@@ -1,35 +1,56 @@
 
 
-## Settings Page + Retake Quiz Button
+## Left Sidebar Navigation + Separate Pages
 
-### What we're building
-A new `/settings` page where the user can view/edit their profile (name, email) and preferences, plus a prominent "Retake Quiz" button in the top nav bar that lets them redo the personality quiz anytime.
+### What changes
 
-### Plan
+**1. Replace top navbar with left sidebar** (`src/components/AppLayout.tsx`)
+- Fixed left sidebar (~240px) with the Signature Trips logo at top
+- User name + avatar below logo, clickable to `/settings`
+- "Redo Quiz" button with the green shine effect at the top of the sidebar
+- Navigation links: Dashboard, Matches, Itineraries, Diaries — each as its own route
+- Logout at the bottom
+- On mobile: collapsible hamburger overlay
 
-**1. Add `updateProfile` action to the store** (`src/store/useStore.ts`)
-- New action: `updateProfile(name: string, email: string)` to update user name/email
+**2. Create dedicated Itineraries page** (`src/pages/Itineraries.tsx`)
+- New standalone page at `/itineraries` showing only itineraries grid
+- "New Itinerary" button, empty state when none exist
 
-**2. Create Settings page** (`src/pages/Settings.tsx`)
-- Uses `AppLayout` wrapper
-- Sections:
-  - **Profile** — editable name and email fields with save button
-  - **Travel Profile** — shows current quiz answers as tags/badges, with a "Retake Quiz" button that navigates to `/quiz`
-  - **Saved Destinations** — count/list of saved destinations with option to clear
-  - **Account** — logout button, danger zone styling
-- Design system: `bg-surface` cards, `font-display` headings, `font-body` text, `bg-primary` buttons, rounded-xl cards
+**3. Create dedicated Diaries page** (`src/pages/Diaries.tsx`)
+- New standalone page at `/diaries` showing only diaries grid
+- Empty state when none exist
 
-**3. Add "Retake Quiz" button to the nav** (`src/components/AppLayout.tsx`)
-- Add a small refresh/sparkle icon button next to the user avatar pill in the top bar that navigates to `/quiz`
-- Tooltip: "Retake Quiz"
-- Also add Settings link (gear icon) next to the user avatar
+**4. Redesign Dashboard as overview** (`src/pages/Dashboard.tsx`)
+- Welcome section with user name
+- Quick stats row: saved destinations count, itineraries count, diaries count, quiz profile type — small metric cards
+- Saved Destinations horizontal scroll (existing)
+- Recent Itineraries preview (show latest 3 with "View all" link to `/itineraries`)
+- Recent Diaries preview (show latest 3 with "View all" link to `/diaries`)
 
-**4. Add route** (`src/App.tsx`)
-- Protected route: `/settings` → `<Settings />`
+**5. Update routes** (`src/App.tsx`)
+- Add `/itineraries` and `/diaries` as protected routes
+- Update nav links from hash-based to path-based
+
+### Sidebar layout structure
+```text
+┌──────────────┬─────────────────────────┐
+│  🧭 Logo     │                         │
+│  Redo Quiz   │                         │
+│──────────────│                         │
+│  Dashboard   │      Main Content       │
+│  Matches     │                         │
+│  Itineraries │                         │
+│  Diaries     │                         │
+│──────────────│                         │
+│  👤 Name     │                         │
+│  Log out     │                         │
+└──────────────┴─────────────────────────┘
+```
 
 ### Files changed
-- `src/store/useStore.ts` — add `updateProfile` action
-- `src/pages/Settings.tsx` — new file
-- `src/components/AppLayout.tsx` — add retake quiz + settings buttons to nav
-- `src/App.tsx` — add settings route
+- `src/components/AppLayout.tsx` — full rewrite to left sidebar
+- `src/pages/Dashboard.tsx` — redesign as overview with stats + previews
+- `src/pages/Itineraries.tsx` — new file
+- `src/pages/Diaries.tsx` — new file
+- `src/App.tsx` — add new routes
 
