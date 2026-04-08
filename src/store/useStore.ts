@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { generateTravelerProfile, type TravelerProfile } from '@/lib/travelerProfile';
 
 export interface QuizAnswers {
   landscape?: string;
