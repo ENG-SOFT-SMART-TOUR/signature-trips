@@ -12,8 +12,6 @@ import Login from "./pages/Login";
 import Quiz from "./pages/Quiz";
 import Matches from "./pages/Matches";
 import Dashboard from "./pages/Dashboard";
-import Itineraries from "./pages/Itineraries";
-import Diaries from "./pages/Diaries";
 import NewItinerary from "./pages/NewItinerary";
 import EditItinerary from "./pages/EditItinerary";
 import ViewItinerary from "./pages/ViewItinerary";
@@ -52,8 +50,6 @@ const App = () => (
             <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
             <Route path="/matches" element={<ProtectedRoute><Matches /></ProtectedRoute>} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-            <Route path="/itineraries" element={<ProtectedRoute><Itineraries /></ProtectedRoute>} />
-            <Route path="/diaries" element={<ProtectedRoute><Diaries /></ProtectedRoute>} />
             <Route path="/itinerary/new" element={<ProtectedRoute><NewItinerary /></ProtectedRoute>} />
             <Route path="/itinerary/:id/edit" element={<ProtectedRoute><EditItinerary /></ProtectedRoute>} />
             <Route path="/itinerary/:id" element={<ProtectedRoute><ViewItinerary /></ProtectedRoute>} />
