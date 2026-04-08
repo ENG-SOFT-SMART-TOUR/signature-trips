@@ -1,7 +1,7 @@
 import { useStore } from '@/store/useStore';
 import { getDestination } from '@/data/mockData';
 import { Link, useNavigate } from 'react-router-dom';
-import { Map, Plus, Calendar, ArrowRight } from 'lucide-react';
+import { Map, Plus, Calendar, ArrowRight, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
 import EmptyState from '@/components/EmptyState';
@@ -9,7 +9,7 @@ import PageTransition from '@/components/PageTransition';
 import AppLayout from '@/components/AppLayout';
 
 export default function Itineraries() {
-  const { itineraries } = useStore();
+  const { itineraries, deleteItinerary } = useStore();
   const navigate = useNavigate();
 
   return (
@@ -54,9 +54,23 @@ export default function Itineraries() {
                           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                             <Map className="h-5 w-5 text-primary" />
                           </div>
-                          <span className="font-body text-xs text-muted-foreground bg-background px-3 py-1 rounded-full">
-                            {it.days.length} days
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="font-body text-xs text-muted-foreground bg-background px-3 py-1 rounded-full">
+                              {it.days.length} days
+                            </span>
+                            <button
+                              onClick={(e) => {
+                                e.preventDefault();
+                                if (confirm('Delete this itinerary?')) {
+                                  deleteItinerary(it.id);
+                                  toast('Itinerary deleted');
+                                }
+                              }}
+                              className="p-1.5 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </div>
                         </div>
                         <h3 className="font-display text-lg font-semibold mb-1">{dest?.name || 'Unknown'}</h3>
                         <p className="font-body text-xs text-muted-foreground mb-4 flex items-center gap-1">

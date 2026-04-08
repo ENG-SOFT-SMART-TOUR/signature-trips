@@ -1,14 +1,16 @@
 import { useStore } from '@/store/useStore';
 import { getDestination } from '@/data/mockData';
-import { Link } from 'react-router-dom';
-import { BookOpen, Globe, Lock, ArrowRight } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { BookOpen, Globe, Lock, ArrowRight, Trash2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 import EmptyState from '@/components/EmptyState';
 import PageTransition from '@/components/PageTransition';
 import AppLayout from '@/components/AppLayout';
 
 export default function Diaries() {
-  const { diaries } = useStore();
+  const { diaries, deleteDiary } = useStore();
+  const navigate = useNavigate();
 
   return (
     <AppLayout>
@@ -42,10 +44,24 @@ export default function Diaries() {
                           <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                             <BookOpen className="h-5 w-5 text-primary" />
                           </div>
-                          <span className="font-body text-xs text-muted-foreground bg-background px-3 py-1 rounded-full flex items-center gap-1">
-                            {d.isPublic ? <Globe className="h-3 w-3" /> : <Lock className="h-3 w-3" />}
-                            {d.isPublic ? 'Public' : 'Private'}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className="font-body text-xs text-muted-foreground bg-background px-3 py-1 rounded-full flex items-center gap-1">
+                              {d.isPublic ? <Globe className="h-3 w-3" /> : <Lock className="h-3 w-3" />}
+                              {d.isPublic ? 'Public' : 'Private'}
+                            </span>
+                            <button
+                              onClick={(e) => {
+                                e.preventDefault();
+                                if (confirm('Delete this diary?')) {
+                                  deleteDiary(d.id);
+                                  toast.success('Diary deleted');
+                                }
+                              }}
+                              className="p-1.5 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </div>
                         </div>
                         <h3 className="font-display text-lg font-semibold mb-1">{dest?.name || 'Unknown'}</h3>
                         <p className="font-body text-xs text-muted-foreground mb-4">
