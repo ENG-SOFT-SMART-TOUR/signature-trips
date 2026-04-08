@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Map, Plus, Calendar, ArrowRight, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
+import { toast } from 'sonner';
 import EmptyState from '@/components/EmptyState';
 import PageTransition from '@/components/PageTransition';
 import AppLayout from '@/components/AppLayout';
