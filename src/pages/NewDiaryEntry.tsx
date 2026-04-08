@@ -111,20 +111,36 @@ export default function NewDiaryEntry() {
 
             <div className="space-y-1.5">
               <Label className="font-body text-sm font-medium">Photo</Label>
-              <Input
+              <input
+                ref={fileRef}
                 type="file"
                 accept="image/*"
-                capture="environment"
+                className="hidden"
                 onChange={e => {
                   const file = e.target.files?.[0];
-                  if (file) {
-                    setPhoto(URL.createObjectURL(file));
-                  }
+                  if (file) setPhoto(URL.createObjectURL(file));
                 }}
-                className="bg-transparent border border-border rounded-lg file:mr-3 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-body file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 cursor-pointer"
               />
-              {photo && (
-                <img src={photo} alt="Preview" className="w-full h-40 object-cover rounded-lg mt-2" />
+              {!photo ? (
+                <button
+                  type="button"
+                  onClick={() => fileRef.current?.click()}
+                  className="w-full flex items-center justify-center gap-2 py-6 border-2 border-dashed border-border rounded-xl text-sm font-body text-muted-foreground hover:border-primary hover:text-primary transition-colors"
+                >
+                  <Upload className="h-4 w-4" />
+                  Choose a photo
+                </button>
+              ) : (
+                <div className="relative">
+                  <img src={photo} alt="Preview" className="w-full h-40 object-cover rounded-xl" />
+                  <button
+                    type="button"
+                    onClick={() => { setPhoto(''); if (fileRef.current) fileRef.current.value = ''; }}
+                    className="absolute top-2 right-2 bg-foreground/60 text-background rounded-full p-1 hover:bg-foreground/80 transition-colors"
+                  >
+                    <X className="h-4 w-4" />
+                  </button>
+                </div>
               )}
             </div>
 
