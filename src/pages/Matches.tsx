@@ -1,6 +1,6 @@
 import { useStore } from '@/store/useStore';
 import { destinations, calculateMatch } from '@/data/mockData';
-import { Heart } from 'lucide-react';
+import { Heart, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';

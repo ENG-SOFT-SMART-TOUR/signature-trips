@@ -64,9 +64,12 @@ interface AppState {
   toggleSaveDestination: (id: string) => void;
   addItinerary: (itinerary: Itinerary) => void;
   updateItinerary: (id: string, days: ItineraryDay[]) => void;
+  deleteItinerary: (id: string) => void;
   addDiary: (diary: Diary) => void;
   toggleDiaryPublic: (id: string) => void;
   addDiaryEntry: (entry: DiaryEntry) => void;
+  deleteDiaryEntry: (diaryId: string, entryId: string) => void;
+  deleteDiary: (id: string) => void;
   updateProfile: (name: string, email: string) => void;
 }
 
@@ -118,6 +121,10 @@ export const useStore = create<AppState>((set) => ({
     ),
   })),
 
+  deleteItinerary: (id) => set((state) => ({
+    itineraries: state.itineraries.filter(it => it.id !== id),
+  })),
+
   addDiary: (diary) => set((state) => ({
     diaries: [...state.diaries, diary],
   })),
@@ -132,6 +139,16 @@ export const useStore = create<AppState>((set) => ({
     diaries: state.diaries.map(d =>
       d.id === entry.diaryId ? { ...d, entries: [...d.entries, entry] } : d
     ),
+  })),
+
+  deleteDiaryEntry: (diaryId, entryId) => set((state) => ({
+    diaries: state.diaries.map(d =>
+      d.id === diaryId ? { ...d, entries: d.entries.filter(e => e.id !== entryId) } : d
+    ),
+  })),
+
+  deleteDiary: (id) => set((state) => ({
+    diaries: state.diaries.filter(d => d.id !== id),
   })),
 
   updateProfile: (name, email) => set((state) => ({

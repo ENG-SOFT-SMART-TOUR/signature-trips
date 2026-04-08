@@ -1,35 +1,29 @@
 
+## 1. Fix photo rendering in diary entries
+- In `DiaryView.tsx`, the photo is rendered via `picsum.photos/seed/...` but now we store blob URLs from file uploads
+- Fix: render `entry.photo` directly as `src` if it starts with `blob:` or `data:`, otherwise fallback to picsum
 
-## Settings Page + Retake Quiz Button
+## 2. Add delete/edit capabilities to the store
+- `deleteItinerary(id)` — remove an itinerary
+- `deleteDiary(id)` — remove a diary
+- `deleteDiaryEntry(diaryId, entryId)` — remove a single diary entry
+- `unsaveDestination(id)` — already exists as `toggleSaveDestination`
 
-### What we're building
-A new `/settings` page where the user can view/edit their profile (name, email) and preferences, plus a prominent "Retake Quiz" button in the top nav bar that lets them redo the personality quiz anytime.
+## 3. Update Itineraries page with delete
+- Add delete button on each itinerary card with confirmation dialog
 
-### Plan
+## 4. Update Diaries page with delete  
+- Add delete button on each diary card with confirmation dialog
 
-**1. Add `updateProfile` action to the store** (`src/store/useStore.ts`)
-- New action: `updateProfile(name: string, email: string)` to update user name/email
+## 5. Update DiaryView with entry delete
+- Add delete button on each diary entry
 
-**2. Create Settings page** (`src/pages/Settings.tsx`)
-- Uses `AppLayout` wrapper
-- Sections:
-  - **Profile** — editable name and email fields with save button
-  - **Travel Profile** — shows current quiz answers as tags/badges, with a "Retake Quiz" button that navigates to `/quiz`
-  - **Saved Destinations** — count/list of saved destinations with option to clear
-  - **Account** — logout button, danger zone styling
-- Design system: `bg-surface` cards, `font-display` headings, `font-body` text, `bg-primary` buttons, rounded-xl cards
+## 6. Update Matches page — allow removing a match
+- Add an unsave/remove button on each matched destination card
 
-**3. Add "Retake Quiz" button to the nav** (`src/components/AppLayout.tsx`)
-- Add a small refresh/sparkle icon button next to the user avatar pill in the top bar that navigates to `/quiz`
-- Tooltip: "Retake Quiz"
-- Also add Settings link (gear icon) next to the user avatar
-
-**4. Add route** (`src/App.tsx`)
-- Protected route: `/settings` → `<Settings />`
-
-### Files changed
-- `src/store/useStore.ts` — add `updateProfile` action
-- `src/pages/Settings.tsx` — new file
-- `src/components/AppLayout.tsx` — add retake quiz + settings buttons to nav
-- `src/App.tsx` — add settings route
-
+## Files changed
+- `src/store/useStore.ts` — add `deleteItinerary`, `deleteDiary`, `deleteDiaryEntry`
+- `src/pages/DiaryView.tsx` — fix photo src, add entry delete
+- `src/pages/Itineraries.tsx` — add delete button
+- `src/pages/Diaries.tsx` — add delete button
+- `src/pages/Matches.tsx` — add remove/unsave button
