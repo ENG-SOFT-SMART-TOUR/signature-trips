@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from '@/store/useStore';
-import { Map, Heart, BookOpen, LayoutDashboard, LogOut, Menu, X, Compass, Settings, RefreshCw } from 'lucide-react';
+import { Map, Heart, BookOpen, LayoutDashboard, LogOut, Menu, X, Compass, RefreshCw } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
