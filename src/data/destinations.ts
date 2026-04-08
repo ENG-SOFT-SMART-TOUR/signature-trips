@@ -13,7 +13,7 @@ export const destinations: Destination[] = [
     id: 'd2', name: 'Gramado', country: 'Brasil',
     description: 'A charming European-inspired mountain town known for its artisanal chocolate, fine dining, and cozy winter festivals nestled in the Serra Gaúcha.',
     tags: ['mountains', 'culture', 'gastronomy', 'comfortable'],
-    image: 'https://images.unsplash.com/photo-1597996768032-9312582a4f42?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1609693512168-2cbb92542559?w=800&h=600&fit=crop',
     latitude: -29.3739, longitude: -50.8765,
   },
   {
@@ -27,14 +27,14 @@ export const destinations: Destination[] = [
     id: 'd4', name: 'Chapada Diamantina', country: 'Brasil',
     description: 'Dramatic table-top mountains, hidden caves, thundering waterfalls, and endless trekking routes through Brazil\'s rugged interior.',
     tags: ['mountains', 'nature', 'adventure', 'budget'],
-    image: 'https://images.unsplash.com/photo-1591302418462-eb55463c49d0?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1624297035888-4b07b0ed0d68?w=800&h=600&fit=crop',
     latitude: -12.4292, longitude: -41.348,
   },
   {
     id: 'd5', name: 'Bonito', country: 'Brasil',
     description: 'Crystal-clear rivers, underground caves, and immersive ecotourism in the heart of Mato Grosso do Sul.',
     tags: ['nature', 'adventure', 'ecotourism', 'moderate'],
-    image: 'https://images.unsplash.com/photo-1583867288774-0698293be7c0?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1596422846543-75c6fc197f07?w=800&h=600&fit=crop',
     latitude: -21.1261, longitude: -56.4836,
   },
   {
@@ -48,7 +48,7 @@ export const destinations: Destination[] = [
     id: 'd7', name: 'Cartagena', country: 'Colômbia',
     description: 'A walled colonial gem on the Caribbean coast with colorful streets, rich history, and vibrant nightlife.',
     tags: ['beach', 'city', 'culture', 'moderate'],
-    image: 'https://images.unsplash.com/photo-1583997052103-b4a1cb974ce5?w=800&h=600&fit=crop',
+    image: 'https://images.unsplash.com/photo-1614358536373-1ce27819009e?w=800&h=600&fit=crop',
     latitude: 10.391, longitude: -75.5144,
   },
   {
