@@ -16,6 +16,7 @@ export default function NewDiaryEntry() {
   const { diaries, itineraries, addDiaryEntry } = useStore();
   const diary = diaries.find(d => d.id === id);
 
+  const fileRef = useRef<HTMLInputElement>(null);
   const [dayNumber, setDayNumber] = useState(1);
   const [activityId, setActivityId] = useState('');
   const [text, setText] = useState('');
