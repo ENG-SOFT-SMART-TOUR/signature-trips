@@ -1,45 +1,35 @@
 
 
-## Quiz Icons & Animations Redesign
+## Settings Page + Retake Quiz Button
 
-### Problem
-The current quiz has generic "shake" rotation on hover for every icon — it feels gimmicky and doesn't relate to what each icon represents. The user wants contextual, meaningful animations and a cleaner layout matching the uploaded screenshot's minimal aesthetic.
+### What we're building
+A new `/settings` page where the user can view/edit their profile (name, email) and preferences, plus a prominent "Retake Quiz" button in the top nav bar that lets them redo the personality quiz anytime.
 
-### Approach
+### Plan
 
-**1. Contextual hover animations per icon** — each option gets a unique, thematic micro-animation:
+**1. Add `updateProfile` action to the store** (`src/store/useStore.ts`)
+- New action: `updateProfile(name: string, email: string)` to update user name/email
 
-| Option | Icon | Hover Animation |
-|--------|------|----------------|
-| Beach / Waves | `Waves` | Gentle vertical wave (`y: [0, -3, 0, 2, 0]`) |
-| Mountains | `Mountain` | Subtle rise up (`y: -4`) |
-| City | `Building2` | Scale up slightly (`scale: 1.1`) |
-| Countryside | `TreePine` | Gentle sway (`rotate: [0, -3, 3, 0]`) |
-| Adventure | `Compass` | Slow spin (`rotate: 360`, 1.5s) |
-| Culture | `Landmark` | Fade glow (opacity pulse via `scale: [1, 1.08, 1]`) |
-| Relaxation | `Palmtree` | Sway like wind (`rotate: [0, -5, 5, -2, 0]`) |
-| Gastronomy | `UtensilsCrossed` | Subtle bounce (`y: [0, -4, 0]`) |
-| Budget | `Wallet` | Quick squeeze (`scaleX: [1, 0.9, 1]`) |
-| Moderate | `BadgeDollarSign` | Gentle nod (`y: [0, -3, 0]`) |
-| Comfortable | `CreditCard` | Slide shimmer (`x: [0, 3, 0]`) |
-| Luxury | `Gem` | Sparkle scale (`scale: [1, 1.12, 1]`) |
-| Solo | `User` | Gentle float (`y: -3`) |
-| Couple | `Heart` | Heartbeat (`scale: [1, 1.15, 1, 1.1, 1]`) |
-| Family | `Users` | Gentle gather (`scale: 1.05`) |
-| Friends | `UserPlus` | Bounce in (`y: [0, -5, 0]`) |
-| Slow & deep | `Snail` | Slow crawl (`x: [0, 4, 0]`, 1.2s) |
-| Balanced | `Scale` | Gentle tilt (`rotate: [0, -5, 5, 0]`) |
-| Fast & packed | `Zap` | Quick flash (`opacity: [1, 0.5, 1]`, fast) |
+**2. Create Settings page** (`src/pages/Settings.tsx`)
+- Uses `AppLayout` wrapper
+- Sections:
+  - **Profile** — editable name and email fields with save button
+  - **Travel Profile** — shows current quiz answers as tags/badges, with a "Retake Quiz" button that navigates to `/quiz`
+  - **Saved Destinations** — count/list of saved destinations with option to clear
+  - **Account** — logout button, danger zone styling
+- Design system: `bg-surface` cards, `font-display` headings, `font-body` text, `bg-primary` buttons, rounded-xl cards
 
-**2. Cleaner card layout** — match the uploaded screenshot:
-- Left-aligned text (not centered) with icon on the right side
-- Horizontal card style instead of vertical icon-above-text
-- Remove `whileHover={{ scale: 1.04 }}` from cards — keep them grounded
-- Selected state: `bg-primary text-white` with a subtle check or filled appearance
-- Unselected: `bg-surface` with clean rounded corners
+**3. Add "Retake Quiz" button to the nav** (`src/components/AppLayout.tsx`)
+- Add a small refresh/sparkle icon button next to the user avatar pill in the top bar that navigates to `/quiz`
+- Tooltip: "Retake Quiz"
+- Also add Settings link (gear icon) next to the user avatar
 
-**3. Store animation config in the data** — each option object gets a `hoverAnim` property with the Framer Motion values, keeping the render logic clean.
+**4. Add route** (`src/App.tsx`)
+- Protected route: `/settings` → `<Settings />`
 
-### Files Changed
-- `src/pages/Quiz.tsx` — restructure option cards to horizontal layout with right-aligned icons, add per-icon animation configs, remove generic shake animation.
+### Files changed
+- `src/store/useStore.ts` — add `updateProfile` action
+- `src/pages/Settings.tsx` — new file
+- `src/components/AppLayout.tsx` — add retake quiz + settings buttons to nav
+- `src/App.tsx` — add settings route
 
