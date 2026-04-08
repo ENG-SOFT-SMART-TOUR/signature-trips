@@ -84,7 +84,7 @@ export const useStore = create<AppState>((set) => ({
 
   login: (email, name) => set({
     isAuthenticated: true,
-    user: { name, email, quizAnswers: {}, tags: [] },
+    user: { name, email, quizAnswers: {}, tags: [], travelerProfile: null },
   }),
 
   logout: () => set({
@@ -97,7 +97,7 @@ export const useStore = create<AppState>((set) => ({
 
   register: (name, email) => set({
     isAuthenticated: true,
-    user: { name, email, quizAnswers: {}, tags: [] },
+    user: { name, email, quizAnswers: {}, tags: [], travelerProfile: null },
   }),
 
   setQuizAnswers: (answers) => set((state) => {
