@@ -110,14 +110,22 @@ export default function NewDiaryEntry() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="font-body text-sm font-medium">Photo (optional)</Label>
+              <Label className="font-body text-sm font-medium">Photo</Label>
               <Input
-                type="text"
-                placeholder="photo-filename.jpg"
-                value={photo}
-                onChange={e => setPhoto(e.target.value)}
-                className="bg-transparent border-0 border-b border-border rounded-none focus-visible:ring-0 focus-visible:border-primary px-0"
+                type="file"
+                accept="image/*"
+                capture="environment"
+                onChange={e => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setPhoto(URL.createObjectURL(file));
+                  }
+                }}
+                className="bg-transparent border border-border rounded-lg file:mr-3 file:py-1.5 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-body file:bg-primary file:text-primary-foreground hover:file:bg-primary/90 cursor-pointer"
               />
+              {photo && (
+                <img src={photo} alt="Preview" className="w-full h-40 object-cover rounded-lg mt-2" />
+              )}
             </div>
 
             <Button type="submit" className="w-full rounded-full bg-accent text-accent-foreground hover:bg-accent/90">
