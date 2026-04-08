@@ -12,6 +12,8 @@ import Login from "./pages/Login";
 import Quiz from "./pages/Quiz";
 import Matches from "./pages/Matches";
 import Dashboard from "./pages/Dashboard";
+import Itineraries from "./pages/Itineraries";
+import Diaries from "./pages/Diaries";
 import NewItinerary from "./pages/NewItinerary";
 import EditItinerary from "./pages/EditItinerary";
 import ViewItinerary from "./pages/ViewItinerary";
