@@ -13,7 +13,7 @@ import AppLayout from '@/components/AppLayout';
 export default function DiaryView() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { diaries, toggleDiaryPublic } = useStore();
+  const { diaries, toggleDiaryPublic, deleteDiary, deleteDiaryEntry } = useStore();
   const diary = diaries.find(d => d.id === id);
 
   if (!diary) return <AppLayout><div className="p-12 text-center text-muted-foreground">Diary not found.</div></AppLayout>;
@@ -59,12 +59,27 @@ export default function DiaryView() {
             </div>
           </div>
 
-          <Button
-            onClick={() => navigate(`/diary/${id}/entry/new`)}
-            className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 mb-8"
-          >
-            <Plus className="h-4 w-4 mr-1" /> New Entry
-          </Button>
+          <div className="flex gap-3 mb-8">
+            <Button
+              onClick={() => navigate(`/diary/${id}/entry/new`)}
+              className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90"
+            >
+              <Plus className="h-4 w-4 mr-1" /> New Entry
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => {
+                if (confirm('Are you sure you want to delete this diary?')) {
+                  deleteDiary(diary.id);
+                  toast.success('Diary deleted');
+                  navigate('/diaries');
+                }
+              }}
+              className="rounded-full text-destructive border-destructive/30 hover:bg-destructive/10"
+            >
+              <Trash2 className="h-4 w-4 mr-1" /> Delete Diary
+            </Button>
+          </div>
 
           {diary.entries.length === 0 ? (
             <EmptyState
@@ -91,11 +106,30 @@ export default function DiaryView() {
                           className="rounded-lg bg-surface p-5"
                         >
                           {entry.photo && (
-                            <img src={`https://picsum.photos/seed/${entry.photo}/600/300`} alt="" className="w-full h-40 object-cover rounded-md mb-3" />
+                            <img
+                              src={entry.photo.startsWith('blob:') || entry.photo.startsWith('data:') ? entry.photo : `https://picsum.photos/seed/${entry.photo}/600/300`}
+                              alt=""
+                              className="w-full h-40 object-cover rounded-md mb-3"
+                            />
                           )}
-                          <h3 className="font-body text-sm font-medium mb-1">{act?.name || 'Activity'}</h3>
-                          <p className="font-body text-sm text-foreground leading-relaxed">{entry.text}</p>
-                          <p className="font-body text-xs text-muted-foreground mt-2">{new Date(entry.timestamp).toLocaleString()}</p>
+                          <div className="flex items-start justify-between">
+                            <div>
+                              <h3 className="font-body text-sm font-medium mb-1">{act?.name || 'Activity'}</h3>
+                              <p className="font-body text-sm text-foreground leading-relaxed">{entry.text}</p>
+                              <p className="font-body text-xs text-muted-foreground mt-2">{new Date(entry.timestamp).toLocaleString()}</p>
+                            </div>
+                            <button
+                              onClick={() => {
+                                if (confirm('Delete this entry?')) {
+                                  deleteDiaryEntry(diary.id, entry.id);
+                                  toast.success('Entry deleted');
+                                }
+                              }}
+                              className="p-1.5 rounded-full text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors shrink-0"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </div>
                         </motion.div>
                       );
                     })}
