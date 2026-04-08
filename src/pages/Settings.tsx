@@ -91,20 +91,39 @@ export default function Settings() {
               Retake Quiz
             </Button>
           </div>
-          {user?.quizAnswers && Object.keys(user.quizAnswers).length > 0 ? (
-            <div className="space-y-3">
-              {Object.entries(user.quizAnswers).map(([key, value]) =>
-                value ? (
-                  <div key={key} className="flex items-center justify-between">
-                    <span className="text-sm font-body text-muted-foreground">
-                      {quizLabels[key] || key}
-                    </span>
-                    <Badge variant="secondary" className="capitalize">
-                      {value}
-                    </Badge>
-                  </div>
-                ) : null
-              )}
+          {user?.travelerProfile ? (
+            <div className="space-y-4">
+              <div className="flex items-center gap-3 p-4 rounded-lg bg-primary/5">
+                <span className="text-2xl">{user.travelerProfile.emoji}</span>
+                <div>
+                  <p className="font-display font-semibold text-foreground">{user.travelerProfile.type}</p>
+                  <p className="font-body text-sm text-muted-foreground">{user.travelerProfile.summary}</p>
+                </div>
+              </div>
+              <div>
+                <p className="text-xs font-body text-muted-foreground mb-2">Your profile tags</p>
+                <div className="flex flex-wrap gap-2">
+                  {user.travelerProfile.tags.map(tag => (
+                    <Badge key={tag} variant="secondary" className="capitalize">{tag}</Badge>
+                  ))}
+                </div>
+              </div>
+              <div className="space-y-2">
+                <p className="text-xs font-body text-muted-foreground">Quiz answers</p>
+                {Object.entries(user.quizAnswers).map(([key, value]) =>
+                  value ? (
+                    <div key={key} className="flex items-center justify-between">
+                      <span className="text-sm font-body text-muted-foreground">
+                        {quizLabels[key] || key}
+                      </span>
+                      <Badge variant="outline" className="capitalize">{value}</Badge>
+                    </div>
+                  ) : null
+                )}
+              </div>
+              <p className="text-xs font-body text-muted-foreground">
+                Quiz taken on {new Date(user.travelerProfile.createdAt).toLocaleDateString()}
+              </p>
             </div>
           ) : (
             <p className="text-sm font-body text-muted-foreground">

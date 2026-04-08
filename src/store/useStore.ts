@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { generateTravelerProfile, type TravelerProfile } from '@/lib/travelerProfile';
 
 export interface QuizAnswers {
   landscape?: string;
@@ -48,6 +49,7 @@ export interface UserProfile {
   email: string;
   quizAnswers: QuizAnswers;
   tags: string[];
+  travelerProfile: TravelerProfile | null;
 }
 
 interface AppState {
@@ -82,7 +84,7 @@ export const useStore = create<AppState>((set) => ({
 
   login: (email, name) => set({
     isAuthenticated: true,
-    user: { name, email, quizAnswers: {}, tags: [] },
+    user: { name, email, quizAnswers: {}, tags: [], travelerProfile: null },
   }),
 
   logout: () => set({
@@ -95,13 +97,14 @@ export const useStore = create<AppState>((set) => ({
 
   register: (name, email) => set({
     isAuthenticated: true,
-    user: { name, email, quizAnswers: {}, tags: [] },
+    user: { name, email, quizAnswers: {}, tags: [], travelerProfile: null },
   }),
 
   setQuizAnswers: (answers) => set((state) => {
-    const tags = Object.values(answers).filter(Boolean).map(v => v!.toLowerCase());
+    const profile = generateTravelerProfile(answers);
+    const tags = profile?.tags || Object.values(answers).filter(Boolean).map(v => v!.toLowerCase());
     return {
-      user: state.user ? { ...state.user, quizAnswers: answers, tags } : null,
+      user: state.user ? { ...state.user, quizAnswers: answers, tags, travelerProfile: profile } : null,
     };
   }),
 
