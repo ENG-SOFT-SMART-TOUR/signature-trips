@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useStore } from '@/store/useStore';
-import { Map, Heart, BookOpen, LayoutDashboard, LogOut, Menu, X, Compass } from 'lucide-react';
+import { Map, Heart, BookOpen, LayoutDashboard, LogOut, Menu, X, Compass, Settings, RefreshCw } from 'lucide-react';
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -57,7 +57,21 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
               ))}
             </div>
 
-            <div className="hidden md:flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-2">
+              <button
+                onClick={() => navigate('/quiz')}
+                title="Retake Quiz"
+                className="p-2 rounded-full text-muted-foreground hover:text-primary hover:bg-surface transition-all duration-200 group"
+              >
+                <RefreshCw className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
+              </button>
+              <Link
+                to="/settings"
+                title="Settings"
+                className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-surface transition-all duration-200 group"
+              >
+                <Settings className="h-4 w-4 transition-transform duration-200 group-hover:rotate-45" />
+              </Link>
               <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface">
                 <div className="w-7 h-7 rounded-full bg-primary/20 flex items-center justify-center text-primary text-xs font-semibold">
                   {user?.name?.charAt(0)?.toUpperCase() || 'U'}

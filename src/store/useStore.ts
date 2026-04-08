@@ -67,6 +67,7 @@ interface AppState {
   addDiary: (diary: Diary) => void;
   toggleDiaryPublic: (id: string) => void;
   addDiaryEntry: (entry: DiaryEntry) => void;
+  updateProfile: (name: string, email: string) => void;
 }
 
 export const useStore = create<AppState>((set) => ({
@@ -131,5 +132,9 @@ export const useStore = create<AppState>((set) => ({
     diaries: state.diaries.map(d =>
       d.id === entry.diaryId ? { ...d, entries: [...d.entries, entry] } : d
     ),
+  })),
+
+  updateProfile: (name, email) => set((state) => ({
+    user: state.user ? { ...state.user, name, email } : null,
   })),
 }));
