@@ -81,7 +81,22 @@ export default function Quiz() {
   const progress = ((step + 1) / questions.length) * 100;
 
   const select = (value: string) => {
-    setAnswers(a => ({ ...a, [current.key]: value }));
+    setAnswers(a => {
+      const updated = { ...a, [current.key]: value };
+      if (step < questions.length - 1) {
+        setTimeout(() => {
+          setDirection(1);
+          setStep(s => s + 1);
+        }, 300);
+      } else {
+        setTimeout(() => {
+          setQuizAnswers(updated);
+          toast.success('Profile created! Here are your matches.');
+          navigate('/matches');
+        }, 300);
+      }
+      return updated;
+    });
   };
 
   const next = () => {
