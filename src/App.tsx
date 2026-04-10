@@ -25,6 +25,7 @@ import Settings from "./pages/Settings";
 import Itineraries from "./pages/Itineraries";
 import Diaries from "./pages/Diaries";
 import NotFound from "./pages/NotFound";
+import Swot from "./pages/Swot";
 
 const queryClient = new QueryClient();
 
@@ -64,6 +65,7 @@ const App = () => (
             <Route path="/itineraries" element={<ProtectedRoute><Itineraries /></ProtectedRoute>} />
             <Route path="/diaries" element={<ProtectedRoute><Diaries /></ProtectedRoute>} />
 
+            <Route path="/swot" element={<Swot />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
