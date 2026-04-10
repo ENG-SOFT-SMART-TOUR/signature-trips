@@ -65,6 +65,7 @@ const App = () => (
             <Route path="/itineraries" element={<ProtectedRoute><Itineraries /></ProtectedRoute>} />
             <Route path="/diaries" element={<ProtectedRoute><Diaries /></ProtectedRoute>} />
 
+            <Route path="/swot" element={<Swot />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </AnimatePresence>
