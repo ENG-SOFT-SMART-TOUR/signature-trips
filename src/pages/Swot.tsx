@@ -11,8 +11,6 @@ const strengths = [
 
 const weaknesses = [
   "Ajuste de ritmo no início da Sprint devido ao feriado e à Páscoa",
-  "Dificuldades técnicas pontuais na integração frontend/backend",
-  "Cards do Quiz e de Validação ainda em andamento ao final da Sprint",
 ];
 
 const opportunities = [
