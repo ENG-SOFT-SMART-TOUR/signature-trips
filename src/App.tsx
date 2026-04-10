@@ -25,6 +25,7 @@ import Settings from "./pages/Settings";
 import Itineraries from "./pages/Itineraries";
 import Diaries from "./pages/Diaries";
 import NotFound from "./pages/NotFound";
+import Swot from "./pages/Swot";
 
 const queryClient = new QueryClient();
 
