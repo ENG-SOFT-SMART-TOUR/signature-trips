@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Compass, Map, Sparkles, ArrowRight, Mountain, TreePine, Globe } from 'lucide-react';
+import { Compass, Map, Sparkles, ArrowRight, Mountain, TreePine, Globe, Quote, Clock, Heart, Shuffle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PageTransition from '@/components/PageTransition';
 import heroImg from '@/assets/hero-travel.jpg';
@@ -54,13 +54,17 @@ export default function Landing() {
                 </span>
               </div>
               <h1 className="font-display text-5xl md:text-7xl font-bold text-primary-foreground mb-6 leading-tight">
-                Your journey,
+                Travel that sounds
                 <br />
-                <span className="italic">your signature</span>
+                <span className="italic">like you</span>
               </h1>
-              <p className="font-body text-lg text-primary-foreground/80 mb-10 max-w-lg mx-auto">
-                Personalized itineraries crafted around who you are. Every trip tells your story.
+              <p className="font-body text-lg text-primary-foreground/80 mb-4 max-w-lg mx-auto">
+                Not another package. A 2-minute quiz, an itinerary built around your rhythm, your taste, your story.
               </p>
+              <div className="flex items-center justify-center gap-2 mb-10 text-primary-foreground/60 text-xs font-body tracking-wide">
+                <Clock className="h-3.5 w-3.5" />
+                <span>2 min · No credit card · Free forever</span>
+              </div>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/register">
                   <Button size="lg" className="rounded-full bg-accent text-accent-foreground hover:bg-accent/90 px-8 text-base">
