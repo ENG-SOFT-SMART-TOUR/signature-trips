@@ -13,10 +13,30 @@ import heroImg from '@/assets/hero-travel.jpg';
 import natureImg from '@/assets/section-nature.jpg';
 
 const destinations = [
-  { name: 'Kyoto', country: 'Japan', tag: 'Culture' },
-  { name: 'Santorini', country: 'Greece', tag: 'Coastal' },
-  { name: 'Patagonia', country: 'Argentina', tag: 'Adventure' },
-  { name: 'Marrakech', country: 'Morocco', tag: 'Heritage' },
+  {
+    name: 'Kyoto',
+    country: 'Japan',
+    tag: 'Culture',
+    image: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1600&h=1000&fit=crop',
+  },
+  {
+    name: 'Santorini',
+    country: 'Greece',
+    tag: 'Coastal',
+    image: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=1600&h=1000&fit=crop',
+  },
+  {
+    name: 'Patagonia',
+    country: 'Argentina',
+    tag: 'Adventure',
+    image: 'https://images.unsplash.com/photo-1531794349733-3dc73ee5957a?w=1600&h=1000&fit=crop',
+  },
+  {
+    name: 'Marrakech',
+    country: 'Morocco',
+    tag: 'Heritage',
+    image: 'https://images.unsplash.com/photo-1597212618440-806262de4f6b?w=1600&h=1000&fit=crop',
+  },
 ];
 
 const testimonials = [
