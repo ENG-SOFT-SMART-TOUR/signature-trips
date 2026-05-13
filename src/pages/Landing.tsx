@@ -11,6 +11,7 @@ import Reveal from '@/components/Reveal';
 import StickyDestinations from '@/components/StickyDestinations';
 import heroImg from '@/assets/hero-travel.jpg';
 import natureImg from '@/assets/section-nature.jpg';
+import patagoniaImg from '@/assets/destination-patagonia.jpg';
 
 const destinations = [
   {
