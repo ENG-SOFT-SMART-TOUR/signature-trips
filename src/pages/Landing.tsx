@@ -2,14 +2,8 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import {
   Compass, Map, Sparkles, ArrowRight, Mountain, TreePine, Globe,
-  Quote, Clock, Heart, Shuffle, ClipboardList, ExternalLink,
+  Quote, Clock, Heart, Shuffle,
 } from 'lucide-react';
-
-// 👉 Substitua pela URL do seu Google Forms publicado.
-// No Google Forms: Enviar (Send) → ícone <> → copie o atributo `src` do iframe.
-// Geralmente é algo como: https://docs.google.com/forms/d/e/SEU_ID_AQUI/viewform?embedded=true
-const GOOGLE_FORM_EMBED_URL = 'https://docs.google.com/forms/d/e/REPLACE_WITH_YOUR_FORM_ID/viewform?embedded=true';
-const GOOGLE_FORM_OPEN_URL = 'https://docs.google.com/forms/d/e/REPLACE_WITH_YOUR_FORM_ID/viewform';
 import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'framer-motion';
 import { useRef } from 'react';
 import PageTransition from '@/components/PageTransition';
@@ -367,45 +361,6 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* ===== Research / Survey ===== */}
-        <section id="research" className="py-28 px-4 bg-surface">
-          <div className="max-w-4xl mx-auto">
-            <Reveal className="text-center mb-12">
-              <span className="font-body text-xs tracking-[0.2em] uppercase text-accent mb-3 block inline-flex items-center gap-2">
-                <ClipboardList className="h-3.5 w-3.5" /> Help shape the product
-              </span>
-              <h2 className="font-display text-3xl md:text-5xl font-semibold text-foreground leading-[1.15] mb-4">
-                Tell us how <span className="italic">you</span> travel
-              </h2>
-              <p className="font-body text-muted-foreground max-w-xl mx-auto">
-                A 5-minute, anonymous survey for academic research. Your answers go straight into the next version of Signature Trips.
-              </p>
-            </Reveal>
-
-            <Reveal delay={0.1} y={24} className="rounded-lg overflow-hidden bg-card shadow-sm">
-              <iframe
-                src={GOOGLE_FORM_EMBED_URL}
-                title="Signature Trips — research survey"
-                className="w-full"
-                style={{ height: '900px', border: 0 }}
-                loading="lazy"
-              >
-                Loading…
-              </iframe>
-            </Reveal>
-
-            <Reveal delay={0.2} className="text-center mt-8">
-              <a
-                href={GOOGLE_FORM_OPEN_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-body text-sm text-primary hover:text-accent transition-colors"
-              >
-                Open in a new tab <ExternalLink className="h-3.5 w-3.5" />
-              </a>
-            </Reveal>
-          </div>
-        </section>
         <footer className="py-12 px-4 text-center bg-card">
           <p className="text-sm text-muted-foreground font-body">© 2026 Signature Trips. Crafted with wanderlust.</p>
         </footer>
