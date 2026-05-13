@@ -406,7 +406,7 @@ export default function Landing() {
             </Reveal>
           </div>
         </section>
-
+        <footer className="py-12 px-4 text-center bg-card">
           <p className="text-sm text-muted-foreground font-body">© 2026 Signature Trips. Crafted with wanderlust.</p>
         </footer>
       </div>
