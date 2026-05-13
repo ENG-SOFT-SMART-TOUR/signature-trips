@@ -30,8 +30,7 @@ const destinations = [
     name: 'Patagonia',
     country: 'Argentina',
     tag: 'Adventure',
-    image: 'https://images.unsplash.com/photo-1531794349733-3dc73ee5957a?w=1600&h=1000&fit=crop',
-  },
+    image: patagoniaImg,
   {
     name: 'Marrakech',
     country: 'Morocco',
