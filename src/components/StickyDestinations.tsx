@@ -12,18 +12,17 @@ type Props = {
 };
 
 /**
- * Apple-style pinned scroll sequence.
- * The section is tall (1 viewport per slide). The visual stage is sticky
- * and cross-fades between full-bleed destination images as the user scrolls.
- * Each image gets its own segment of scrollYProgress.
+ * Apple-style pinned scroll sequence with overlapping cross-fade.
+ * Each image's opacity peaks at the center of its segment and fades into
+ * the neighbours, so two slides are always blending — no hard cuts.
  */
 export default function StickyDestinations({ destinations }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
 
-  // Total height = 1 intro vh + 1 vh per slide (so the last one breathes too)
   const slides = destinations.length;
-  const totalHeight = `${(slides + 0.5) * 100}vh`;
+  // Generous height — ~1.6 viewport per slide gives time for slow cross-fades.
+  const totalHeight = `${slides * 160 + 60}vh`;
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -47,7 +46,6 @@ export default function StickyDestinations({ destinations }: Props) {
           </h2>
         </div>
 
-        {/* Slides stack */}
         {destinations.map((dest, i) => (
           <DestSlide
             key={dest.name}
@@ -83,49 +81,68 @@ function DestSlide({
   scrollYProgress: MotionValue<number>;
   reduce: boolean;
 }) {
-  // Carve scroll into segments: each slide gets 1/total progress range.
+  // Each slide peaks at its center; fades into neighbours' centers.
+  // This guarantees adjacent slides cross-fade smoothly with no flash gap.
   const seg = 1 / total;
-  const start = index * seg;
-  const end = start + seg;
-  const fadeIn = start;
-  const fullIn = start + seg * 0.2;
-  const fullOut = end - seg * 0.2;
-  const fadeOut = end;
+  const center = (index + 0.5) * seg;
+  const prev = center - seg;
+  const next = center + seg;
 
-  const opacity = useTransform(
-    scrollYProgress,
-    [fadeIn, fullIn, fullOut, fadeOut],
-    [0, 1, 1, 0],
-  );
-  const scale = useTransform(scrollYProgress, [fadeIn, fadeOut], [1.08, 1]);
-  const textY = useTransform(scrollYProgress, [fadeIn, fullIn], [40, 0]);
-  const filter = useTransform(
-    scrollYProgress,
-    [fadeIn, fullIn, fullOut, fadeOut],
-    ['blur(12px)', 'blur(0px)', 'blur(0px)', 'blur(12px)'],
-  );
+  const isFirst = index === 0;
+  const isLast = index === total - 1;
 
-  // First slide is visible immediately at scroll=0
-  const initialOpacity = index === 0 ? 1 : 0;
+  // Input + output arrays for opacity. Edges hold full opacity for first/last.
+  const opacityInput = [
+    isFirst ? 0 : prev,
+    isFirst ? 0 : prev + seg * 0.4,
+    center,
+    isLast ? 1 : next - seg * 0.4,
+    isLast ? 1 : next,
+  ];
+  const opacityOutput = [
+    isFirst ? 1 : 0,
+    isFirst ? 1 : 1,
+    1,
+    isLast ? 1 : 1,
+    isLast ? 1 : 0,
+  ];
+
+  const opacity = useTransform(scrollYProgress, opacityInput, opacityOutput);
+
+  // Very gentle Ken-Burns zoom across the slide's full lifetime.
+  const scaleStart = isFirst ? 0 : prev;
+  const scaleEnd = isLast ? 1 : next;
+  const scale = useTransform(scrollYProgress, [scaleStart, scaleEnd], [1.06, 1.0]);
+
+  // Caption slides up softly as slide enters peak.
+  const textY = useTransform(
+    scrollYProgress,
+    [isFirst ? 0 : prev, center],
+    [isFirst ? 0 : 30, 0],
+  );
+  const textOpacity = useTransform(
+    scrollYProgress,
+    [isFirst ? 0 : prev + seg * 0.3, center, isLast ? 1 : next - seg * 0.3],
+    [isFirst ? 1 : 0, 1, isLast ? 1 : 0],
+  );
 
   return (
     <motion.div
-      className="absolute inset-0 will-change-[opacity,transform]"
-      style={reduce ? { opacity: index === 0 ? 1 : 0 } : { opacity }}
-      initial={{ opacity: initialOpacity }}
+      className="absolute inset-0 will-change-[opacity]"
+      style={reduce ? { opacity: isFirst ? 1 : 0 } : { opacity }}
     >
       <motion.img
         src={`https://picsum.photos/seed/${destination.name.toLowerCase()}/1600/1000`}
         alt={`${destination.name}, ${destination.country}`}
-        className="absolute inset-0 w-full h-full object-cover"
+        className="absolute inset-0 w-full h-full object-cover will-change-transform"
         loading={index === 0 ? 'eager' : 'lazy'}
-        style={reduce ? undefined : { scale, filter }}
+        style={reduce ? undefined : { scale }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/30 to-foreground/40" />
 
       <motion.div
-        className="absolute inset-x-0 bottom-24 z-20 px-6 text-center"
-        style={reduce ? undefined : { y: textY }}
+        className="absolute inset-x-0 bottom-24 z-20 px-6 text-center will-change-transform"
+        style={reduce ? undefined : { y: textY, opacity: textOpacity }}
       >
         <span className="inline-block px-3 py-1 rounded-full bg-accent/90 text-accent-foreground text-xs font-body font-medium mb-4">
           {destination.tag}
@@ -151,10 +168,17 @@ function Dot({
   scrollYProgress: MotionValue<number>;
 }) {
   const seg = 1 / total;
-  const start = index * seg;
-  const end = start + seg;
-  const width = useTransform(scrollYProgress, [start, start + seg * 0.2, end - seg * 0.2, end], [8, 28, 28, 8]);
-  const opacity = useTransform(scrollYProgress, [start, start + seg * 0.2, end - seg * 0.2, end], [0.4, 1, 1, 0.4]);
+  const center = (index + 0.5) * seg;
+  const width = useTransform(
+    scrollYProgress,
+    [center - seg * 0.5, center, center + seg * 0.5],
+    [8, 28, 8],
+  );
+  const opacity = useTransform(
+    scrollYProgress,
+    [center - seg * 0.5, center, center + seg * 0.5],
+    [0.4, 1, 0.4],
+  );
   return (
     <motion.span
       className="h-1.5 rounded-full bg-primary-foreground"
