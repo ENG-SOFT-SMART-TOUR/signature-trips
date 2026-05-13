@@ -31,6 +31,7 @@ const destinations = [
     country: 'Argentina',
     tag: 'Adventure',
     image: patagoniaImg,
+  },
   {
     name: 'Marrakech',
     country: 'Morocco',
