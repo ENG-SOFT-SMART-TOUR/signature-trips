@@ -133,7 +133,7 @@ function DestSlide({
       style={reduce ? { opacity: isFirst ? 1 : 0 } : { opacity }}
     >
       <motion.img
-        src={`https://picsum.photos/seed/${destination.name.toLowerCase()}/1600/1000`}
+        src={destination.image ?? `https://picsum.photos/seed/${destination.name.toLowerCase()}/1600/1000`}
         alt={`${destination.name}, ${destination.country}`}
         className="absolute inset-0 w-full h-full object-cover will-change-transform"
         loading={index === 0 ? 'eager' : 'lazy'}
