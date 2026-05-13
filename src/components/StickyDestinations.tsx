@@ -5,6 +5,7 @@ type Destination = {
   name: string;
   country: string;
   tag: string;
+  image?: string;
 };
 
 type Props = {
