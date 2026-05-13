@@ -8,6 +8,7 @@ import { motion, useScroll, useTransform, useSpring, useReducedMotion } from 'fr
 import { useRef } from 'react';
 import PageTransition from '@/components/PageTransition';
 import Reveal from '@/components/Reveal';
+import StickyDestinations from '@/components/StickyDestinations';
 import heroImg from '@/assets/hero-travel.jpg';
 import natureImg from '@/assets/section-nature.jpg';
 
@@ -295,44 +296,8 @@ export default function Landing() {
           </div>
         </section>
 
-        {/* ===== Destinations by mood ===== */}
-        <section className="py-28 px-4 bg-background">
-          <div className="max-w-6xl mx-auto">
-            <Reveal className="text-center mb-14">
-              <span className="font-body text-xs tracking-[0.2em] uppercase text-primary mb-3 block">By mood</span>
-              <h2 className="font-display text-3xl md:text-5xl font-semibold text-foreground leading-[1.15]">
-                Find a place that matches the day you're having
-              </h2>
-            </Reveal>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {destinations.map((dest, i) => (
-                <Reveal
-                  key={dest.name}
-                  delay={i * 0.08}
-                  y={28}
-                  className="group relative aspect-[3/4] rounded-lg overflow-hidden hover-lift cursor-pointer"
-                >
-                  <img
-                    src={`https://picsum.photos/seed/${dest.name.toLowerCase()}/600/800`}
-                    alt={`${dest.name}, ${dest.country}`}
-                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-transparent" />
-                  <div className="absolute top-3 left-3">
-                    <span className="px-3 py-1 rounded-full bg-accent/90 text-accent-foreground text-xs font-body font-medium">
-                      {dest.tag}
-                    </span>
-                  </div>
-                  <div className="absolute bottom-4 left-4">
-                    <h3 className="font-display text-lg font-semibold text-primary-foreground">{dest.name}</h3>
-                    <p className="font-body text-xs text-primary-foreground/80">{dest.country}</p>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* ===== Destinations — Apple-style pinned scroll, one image at a time ===== */}
+        <StickyDestinations destinations={destinations} />
 
         {/* ===== Stories ===== */}
         <section className="py-28 px-4 bg-surface">
