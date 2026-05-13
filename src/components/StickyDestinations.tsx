@@ -94,13 +94,16 @@ function DestSlide({
 
   const opacity = useTransform(
     scrollYProgress,
-    [fadeIn - 0.001, fullIn, fullOut, fadeOut],
+    [fadeIn, fullIn, fullOut, fadeOut],
     [0, 1, 1, 0],
   );
   const scale = useTransform(scrollYProgress, [fadeIn, fadeOut], [1.08, 1]);
   const textY = useTransform(scrollYProgress, [fadeIn, fullIn], [40, 0]);
-  const blur = useTransform(scrollYProgress, [fadeIn, fullIn, fullOut, fadeOut], [12, 0, 0, 12]);
-  const filter = useTransform(blur, (b) => `blur(${b}px)`);
+  const filter = useTransform(
+    scrollYProgress,
+    [fadeIn, fullIn, fullOut, fadeOut],
+    ['blur(12px)', 'blur(0px)', 'blur(0px)', 'blur(12px)'],
+  );
 
   // First slide is visible immediately at scroll=0
   const initialOpacity = index === 0 ? 1 : 0;
