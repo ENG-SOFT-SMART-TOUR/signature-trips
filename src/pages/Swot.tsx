@@ -82,7 +82,7 @@ export default function Swot() {
           <h1 className="font-['Playfair_Display'] text-3xl md:text-5xl font-medium text-foreground tracking-tight mb-4">
             Matriz SWOT
           </h1>
-          <p className="text-muted-foreground text-lg">Sprint 1 — Análise Estratégica</p>
+          <p className="text-muted-foreground text-lg">Release 1 — Análise Estratégica (Sprints 2 e 3)</p>
         </motion.div>
 
         {/* Grid */}
