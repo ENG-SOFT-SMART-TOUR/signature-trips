@@ -1,29 +1,30 @@
+## Atualização da página SWOT — Release 1
 
-## 1. Fix photo rendering in diary entries
-- In `DiaryView.tsx`, the photo is rendered via `picsum.photos/seed/...` but now we store blob URLs from file uploads
-- Fix: render `entry.photo` directly as `src` if it starts with `blob:` or `data:`, otherwise fallback to picsum
+Atualizar `src/pages/Swot.tsx` substituindo o conteúdo dos 4 quadrantes e o subtítulo para refletir o consolidado da Release 1 (englobando Sprint 2 e Sprint 3).
 
-## 2. Add delete/edit capabilities to the store
-- `deleteItinerary(id)` — remove an itinerary
-- `deleteDiary(id)` — remove a diary
-- `deleteDiaryEntry(diaryId, entryId)` — remove a single diary entry
-- `unsaveDestination(id)` — already exists as `toggleSaveDestination`
+### Cabeçalho
+- Subtítulo muda de "Sprint 1 — Análise Estratégica" para **"Release 1 — Análise Estratégica (Sprints 2 e 3)"**.
 
-## 3. Update Itineraries page with delete
-- Add delete button on each itinerary card with confirmation dialog
+### Forças 💪
+- Equipe bem dividida com PO, Scrum Master e Tech Lead alinhados e entrosados.
+- Stack tecnológica consolidada (Java + React + PostgreSQL) com Clean Architecture bem definida.
+- Integração Git + Jira funcionando com commits linkados às tasks.
+- Todos os 6 RFs propostos para a Release 1 foram entregues com sucesso.
+- Equipe rendeu muito bem nas Sprints 2 e 3, mantendo ritmo e qualidade.
+- Refatoração do back-end e do front-end executadas com excelência.
 
-## 4. Update Diaries page with delete  
-- Add delete button on each diary card with confirmation dialog
+### Fraquezas ⚠️
+- Na Sprint 2 um dos RFs não foi implementado dentro do prazo planejado.
+- Esse RF pendente foi resolvido e entregue durante a Sprint 3.
 
-## 5. Update DiaryView with entry delete
-- Add delete button on each diary entry
+### Oportunidades 🚀
+- Base sólida concluída permite focar na finalização do projeto com os próximos RFs.
+- Uso da inteligência artificial como apoio para alavancar a produtividade: o time pensa como ser humano e usa a IA para executar com mais velocidade.
 
-## 6. Update Matches page — allow removing a match
-- Add an unsave/remove button on each matched destination card
+### Ameaças 🔴
+- Garantir a entrega de todas as próximas releases, cujos RFs têm complexidade maior.
+- Assegurar 100% de aderência aos princípios SOLID e às 10 heurísticas de Nielsen em todo o desenvolvimento futuro.
 
-## Files changed
-- `src/store/useStore.ts` — add `deleteItinerary`, `deleteDiary`, `deleteDiaryEntry`
-- `src/pages/DiaryView.tsx` — fix photo src, add entry delete
-- `src/pages/Itineraries.tsx` — add delete button
-- `src/pages/Diaries.tsx` — add delete button
-- `src/pages/Matches.tsx` — add remove/unsave button
+### Detalhes técnicos
+- Editar apenas os arrays `strengths`, `weaknesses`, `opportunities`, `threats` e o texto do subtítulo em `src/pages/Swot.tsx`.
+- Nenhuma mudança de layout, tokens de design ou animações.

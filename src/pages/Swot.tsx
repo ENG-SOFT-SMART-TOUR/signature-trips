@@ -2,27 +2,26 @@ import { motion } from "framer-motion";
 
 const strengths = [
   "Equipe bem dividida com PO, Scrum Master e Tech Lead alinhados e entrosados",
-  "Stack tecnológica consolidada (Java + React + PostgreSQL) e arquitetura Clean Architecture bem definida",
+  "Stack tecnológica consolidada (Java + React + PostgreSQL) com Clean Architecture bem definida",
   "Integração Git + Jira funcionando com commits linkados às tasks",
-  "Protótipo navegável entregue no Lovable com fluxo completo da Release 1",
-  "Diagramas ER, Diagrama de Classes, README, Roadmap de Releases, Product Backlog e Recursos por Release documentados",
-  "Projeto inteiro definido e planejado desde a Sprint 1 (todas as releases estruturadas)",
+  "Todos os 6 RFs propostos para a Release 1 foram entregues com sucesso",
+  "Equipe rendeu muito bem nas Sprints 2 e 3, mantendo ritmo e qualidade",
+  "Refatoração do back-end e do front-end executadas com excelência",
 ];
 
 const weaknesses = [
-  "Ajuste de ritmo no início da Sprint devido ao feriado e à Páscoa",
+  "Na Sprint 2 um dos RFs não foi implementado dentro do prazo planejado",
+  "O RF pendente foi resolvido e entregue durante a Sprint 3",
 ];
 
 const opportunities = [
-  "Base sólida e bem construída para acelerar a entrega das próximas releases",
-  "Projeto totalmente definido permite foco total na execução a partir da Sprint 2",
-  "Equipe alinhada pode alavancar entregas utilizando a inteligência artificial como apoio",
+  "Base sólida concluída permite focar na finalização do projeto com os próximos RFs",
+  "Uso da inteligência artificial como apoio para alavancar a produtividade: o time pensa como ser humano e usa a IA para executar com mais velocidade",
 ];
 
 const threats = [
-  "Prazo curto entre as sprints",
-  "Complexidade crescente nas próximas releases (mapa, galeria, diário)",
-  "Dependência de APIs externas (Google Maps, S3/MinIO) nas releases 3 e 4",
+  "Garantir a entrega de todas as próximas releases, cujos RFs têm complexidade maior",
+  "Assegurar 100% de aderência aos princípios SOLID e às 10 heurísticas de Nielsen em todo o desenvolvimento futuro",
 ];
 
 interface QuadrantProps {
@@ -83,7 +82,7 @@ export default function Swot() {
           <h1 className="font-['Playfair_Display'] text-3xl md:text-5xl font-medium text-foreground tracking-tight mb-4">
             Matriz SWOT
           </h1>
-          <p className="text-muted-foreground text-lg">Sprint 1 — Análise Estratégica</p>
+          <p className="text-muted-foreground text-lg">Release 1 — Análise Estratégica (Sprints 2 e 3)</p>
         </motion.div>
 
         {/* Grid */}
